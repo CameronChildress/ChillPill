@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36d727b813037f46b091f9f19e10823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  acceleration: 9
+  speed: 15
+  acceleration: 15
   targetTransform: {fileID: 0}
+  deathFX: {fileID: 0}
 --- !u!54 &1981054703
 Rigidbody:
   m_ObjectHideFlags: 0
