@@ -9,6 +9,12 @@ public class MoveCamera : MonoBehaviour
     private float xRotation = 0.0f;
     private float yRotation = 0.0f;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * horizontalSpeed;
