@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public Weapon weapon;
 
+
     private void Start()
     {
         
@@ -17,10 +18,6 @@ public class Player : MonoBehaviour
         {
             OnFire();
         }
-        else if (Input.GetMouseButton(1))
-        {
-            OnVacuum();
-        }
     }
 
     public void OnFire()
@@ -28,8 +25,12 @@ public class Player : MonoBehaviour
         weapon.Fire(transform.forward);
     }
 
-    public void OnVacuum()
+    private void OnCollisionEnter(Collision collision)
     {
-        weapon.Vacuum();
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            //health -= 10;
+        }
     }
 }

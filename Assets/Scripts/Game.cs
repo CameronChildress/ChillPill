@@ -10,8 +10,15 @@ public class Game : MonoBehaviour
 
     float score;
 
-    public int maxSpawnNum;
+    public int initialMaxSpawnNum;
+    private int currentSpawnNum;
+    public int waveIncreaseThreshold;
+    private int enemyKills;
+
     public float initialSpawnTime;
+    private float currentSpawnTime;
+
+
     [Range(20,35)]
     public float minSpawnRange;
     [Range(35, 55)]
@@ -21,26 +28,28 @@ public class Game : MonoBehaviour
 
     public Camera playerCamera;
     public GameObject flyingEnemy;
+    public GameObject dragonEnemy;
 
     private List<GameObject> enemies = new List<GameObject>();
 
     private void Awake()
     {
         instance = this;
+        currentSpawnTime = initialSpawnTime;
+        currentSpawnNum = initialMaxSpawnNum;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         currentTime += Time.deltaTime;
 
-        if (currentTime > initialSpawnTime && enemies.Count < maxSpawnNum)
+        if (currentTime > currentSpawnTime && enemies.Count < currentSpawnNum)
         {
             SpawnFlyingEnemy();
-            currentTime -= initialSpawnTime;
+            currentTime -= currentSpawnTime;
+            currentSpawnTime *= 0.95f;
         }
-
     }
 
     private void SpawnFlyingEnemy()
@@ -66,8 +75,39 @@ public class Game : MonoBehaviour
         enemies.Add(newEnemy);
     }
 
+    private void SpawnDragonEnemy()
+    {
+
+        Vector2 behindPlayer = new Vector2(playerCamera.transform.forward.x, playerCamera.transform.forward.z) * -1;
+        behindPlayer = behindPlayer.normalized;
+
+        float distRange = Random.Range(minSpawnRange, maxSpawnRange);
+        float diffRange = Random.Range(-30.0f, 30.0f);
+
+        behindPlayer *= distRange;
+
+        Vector2 perp = Vector2.Perpendicular(behindPlayer).normalized;
+        perp *= diffRange;
+
+        behindPlayer += perp;
+
+        Vector3 newPos = new Vector3(playerCamera.transform.position.x + behindPlayer.x, 10, playerCamera.transform.position.z + behindPlayer.y);
+
+        GameObject newEnemy = Instantiate(dragonEnemy, newPos, Quaternion.identity);
+        newEnemy.GetComponent<DragonEnemy>().targetTransform = playerCamera.transform;
+        enemies.Add(newEnemy);
+    }
+
     public void RemoveEnemy(GameObject enemy)
     {
+        enemyKills++;
+        if (enemyKills >= waveIncreaseThreshold)
+        {
+            SpawnDragonEnemy();
+            currentSpawnNum++;
+            enemyKills = 0;
+        }
+
         enemies.Remove(enemy);
     }
 }

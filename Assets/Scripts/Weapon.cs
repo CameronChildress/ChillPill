@@ -61,14 +61,4 @@ public class Weapon : MonoBehaviour
 
         return false;
     }
-
-    public void Vacuum()
-    {
-        //GameObject gameObject = Instantiate(projectile, emitTransform.position, emitTransform.rotation);
-        //gameObject.GetComponent<Projectile>().Vacuum(direction);
-
-        Vector3 directionVector = (player.transform.position - gameObject.transform.position).normalized;
-        gameObject.transform.position += directionVector;
-        rb.AddForce(directionVector);
-    }
 }
