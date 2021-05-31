@@ -22,5 +22,14 @@ public class Enemy : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
+    public void KillEnemy()
+    {
+        //Create FX object
 
+        //Remove reference of self from Game object
+        Game.Instance.RemoveEnemy(gameObject);
+
+        //Destroy self
+        Destroy(this);
+    }
 }
