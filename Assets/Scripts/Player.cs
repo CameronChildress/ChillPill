@@ -17,10 +17,19 @@ public class Player : MonoBehaviour
         {
             OnFire();
         }
+        else if (Input.GetMouseButton(1))
+        {
+            OnVacuum();
+        }
     }
 
     public void OnFire()
     {
         weapon.Fire(transform.forward);
+    }
+
+    public void OnVacuum()
+    {
+        weapon.Vacuum();
     }
 }

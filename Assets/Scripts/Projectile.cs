@@ -23,6 +23,12 @@ public class Projectile : MonoBehaviour
         rigidbody.AddForce(Camera.main.transform.forward * speed, ForceMode.VelocityChange);
     }
 
+    //public void Vacuum(Vector3 forward)
+    //{
+    //    Rigidbody rigidbody = GetComponent<Rigidbody>();
+    //    rigidbody.AddForce(Camera.main.transform.forward * speed, ForceMode.VelocityChange);
+    //}
+
     private void OnCollisionEnter(Collision collision)
     {
         if (destroyOnHit)
