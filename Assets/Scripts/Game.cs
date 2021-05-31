@@ -27,6 +27,7 @@ public class Game : MonoBehaviour
     public bool spawnOffScreen;
 
     public Camera playerCamera;
+    public Transform targetTransform;
     public GameObject flyingEnemy;
     public GameObject dragonEnemy;
 
@@ -68,7 +69,7 @@ public class Game : MonoBehaviour
 
         behindPlayer += perp;
 
-        Vector3 newPos = new Vector3(playerCamera.transform.position.x + behindPlayer.x, 0.5f, playerCamera.transform.position.z + behindPlayer.y);
+        Vector3 newPos = new Vector3(targetTransform.position.x + behindPlayer.x, 0.5f, targetTransform.position.z + behindPlayer.y);
 
         GameObject newEnemy = Instantiate(flyingEnemy, newPos, Quaternion.identity);
         newEnemy.GetComponent<Enemy>().targetTransform = playerCamera.transform;
@@ -91,7 +92,7 @@ public class Game : MonoBehaviour
 
         behindPlayer += perp;
 
-        Vector3 newPos = new Vector3(playerCamera.transform.position.x + behindPlayer.x, 10, playerCamera.transform.position.z + behindPlayer.y);
+        Vector3 newPos = new Vector3(targetTransform.position.x + behindPlayer.x, 10, targetTransform.position.z + behindPlayer.y);
 
         GameObject newEnemy = Instantiate(dragonEnemy, newPos, Quaternion.identity);
         newEnemy.GetComponent<DragonEnemy>().targetTransform = playerCamera.transform;

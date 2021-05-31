@@ -6,6 +6,11 @@ public class DragonEnemy : MonoBehaviour
 {
     [Range(0, 10)]
     public float speed = 5;
+    private float defaultSpeed;
+
+    public float shotFireSpeed = 4;
+    private float currentFireTime = 0;
+    public float shotAirTime = 3;
 
     [Range(0, 20)]
     public float acceleration = 5;
@@ -14,12 +19,15 @@ public class DragonEnemy : MonoBehaviour
 
     public Transform targetTransform;
 
+    public GameObject projectile;
     public GameObject deathFX;
+    public GameObject debugMarker;
 
     public List<WeakSpot> weakSpots = new List<WeakSpot>();
 
     public void Awake()
     {
+        defaultSpeed = speed;
         foreach (WeakSpot weak in weakSpots)
         {
             weak.SetDragonParent(this);
@@ -41,6 +49,8 @@ public class DragonEnemy : MonoBehaviour
     void Update()
     {
         if (weakSpots.Count <= 0) KillEnemy();
+        FireUpdate();
+        speed = (Vector3.Distance(targetTransform.position, transform.position) > 30) ? defaultSpeed * 3 : defaultSpeed;
 
         Quaternion neededRotation = Quaternion.LookRotation(targetTransform.position - transform.position);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * 25f);
@@ -48,6 +58,17 @@ public class DragonEnemy : MonoBehaviour
         velocity += transform.forward * acceleration * Time.deltaTime;
         velocity = Vector3.ClampMagnitude(velocity, speed);
         transform.position += velocity * Time.deltaTime;
+    }
+
+    private void FireUpdate()
+    {
+        currentFireTime += Time.deltaTime;
+
+        if (currentFireTime >= shotFireSpeed)
+        {
+            currentFireTime -= shotFireSpeed;
+            Shoot();
+        }
     }
 
     public void KillEnemy()
@@ -60,5 +81,21 @@ public class DragonEnemy : MonoBehaviour
 
         //Destroy self
         Destroy(this.gameObject);
+    }
+
+    private void Shoot()
+    {
+        Vector3 playerVelocity = Player.Instance.characterController.velocity;
+        float yVelocity = (-(transform.position.y) - 0.5f * (-9.8f) * (shotAirTime * shotAirTime)) / shotAirTime;
+
+        Vector3 guessedPosition = (Player.Instance.transform.position) + (Player.Instance.movement.velocity * shotAirTime);
+        guessedPosition.y = transform.position.y;
+        Instantiate(debugMarker, new Vector3 (guessedPosition.x, 0, guessedPosition.z) , Quaternion.identity);
+        Vector3 vMagnitude = (guessedPosition - transform.position) / shotAirTime;
+        vMagnitude.y = yVelocity;
+
+        //Create object and add velocity
+        GameObject shot = Instantiate(projectile, transform.position, Quaternion.identity);
+        shot.GetComponent<Rigidbody>().AddForce(vMagnitude, ForceMode.VelocityChange);
     }
 }
