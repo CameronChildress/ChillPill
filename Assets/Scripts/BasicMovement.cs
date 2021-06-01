@@ -7,21 +7,26 @@ public class BasicMovement : MonoBehaviour
     public CharacterController characterController;
     public float speed = 5;
 
+    public Vector3 velocity;
+
     void Update()
     {
+        velocity = Vector3.zero;
         if (Input.GetKey(KeyCode.W))
         {
             Vector3 playerForward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
             playerForward = playerForward.normalized;
 
-            transform.position += playerForward * speed * Time.deltaTime;
+            velocity = playerForward * speed;
+            transform.position += velocity * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
             Vector3 playerBack = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
             playerBack = -playerBack.normalized;
 
-            transform.position += playerBack * speed * Time.deltaTime;
+            velocity = playerBack * speed;
+            transform.position += velocity * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -33,7 +38,8 @@ public class BasicMovement : MonoBehaviour
 
             Vector3 v3 = new Vector3(v2.x, 0, v2.y);
 
-            transform.position += v3 * speed * Time.deltaTime;
+            velocity = v3 * speed;
+            transform.position += velocity * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -45,7 +51,8 @@ public class BasicMovement : MonoBehaviour
 
             Vector3 v3 = new Vector3(v2.x, 0, v2.y);
 
-            transform.position += -v3 * speed * Time.deltaTime;
+            velocity = -v3 * speed;
+            transform.position += velocity * Time.deltaTime;
         }
     }
 }
