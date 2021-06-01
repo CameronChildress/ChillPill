@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Weapon weapon;
     public float health = 100.0f;
+    private static Player instance;
+    public static Player Instance { get { return instance; } }
+    public BasicMovement movement;
+    public Weapon weapon;
+    public CharacterController characterController;
 
-    private void Start()
+    private void Awake()
     {
-        
+        instance = this;
     }
 
     private void Update()
