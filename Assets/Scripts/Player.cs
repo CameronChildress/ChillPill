@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Weapon weapon;
-
+    public float health = 100.0f;
 
     private void Start()
     {
@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             OnFire();
+        }
+
+        if (health <= 0)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
         }
     }
 
@@ -30,7 +35,7 @@ public class Player : MonoBehaviour
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null)
         {
-            //health -= 10;
+            health -= 10;
         }
     }
 }
