@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 1866321528604478964}
   - component: {fileID: 1866321528604478965}
   - component: {fileID: 1866321528604478966}
-  m_Layer: 0
+  - component: {fileID: -8379160864317273332}
+  m_Layer: 6
   m_Name: DragonShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,3 +113,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8379160864317273332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866321528604478967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf27fe94e7186c242bb312c37ba4abd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionFX: {fileID: 4543209727775744340, guid: fbaf8ea4b2c27ab4496bda9e851e4856, type: 3}
