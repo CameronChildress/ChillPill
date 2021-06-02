@@ -599,7 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6.5
   shotFireSpeed: 4
-  shotAirTime: 3
+  shotAirTime: 2
   targetTransform: {fileID: 0}
   shotTransform: {fileID: 1163480684202168160}
   projectile: {fileID: 1866321528604478967, guid: 20091131766c7e143b4f41c41aa98138, type: 3}

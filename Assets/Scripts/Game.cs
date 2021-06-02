@@ -107,6 +107,7 @@ public class Game : MonoBehaviour
             SpawnDragonEnemy();
             currentSpawnNum++;
             enemyKills = 0;
+            waveIncreaseThreshold++;
         }
 
         enemies.Remove(enemy);
