@@ -24,6 +24,7 @@ public class DragonEnemy : MonoBehaviour
     public GameObject projectile;
     public GameObject deathFX;
     public GameObject debugMarker;
+    public GameObject follower;
 
     public List<WeakSpot> weakSpots = new List<WeakSpot>();
 
@@ -38,11 +39,10 @@ public class DragonEnemy : MonoBehaviour
 
     public void Start()
     {
-        GameObject newObject = new GameObject();
-        newObject.transform.parent = targetTransform;
+        GameObject newObject = Instantiate(follower, Vector3.zero, Quaternion.identity);
 
         float randAngle = Random.Range(0, 360);
-        newObject.transform.position += new Vector3(24, 10, 0);
+        newObject.transform.position += new Vector3(24, 10, 0) + Player.Instance.transform.position;
 
         newObject.transform.RotateAround(targetTransform.position, Vector3.up, randAngle);
         targetTransform = newObject.transform;

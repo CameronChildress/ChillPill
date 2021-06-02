@@ -600,12 +600,12 @@ MonoBehaviour:
   speed: 6.5
   shotFireSpeed: 4
   shotAirTime: 3
-  acceleration: 5
   targetTransform: {fileID: 0}
   shotTransform: {fileID: 1163480684202168160}
   projectile: {fileID: 1866321528604478967, guid: 20091131766c7e143b4f41c41aa98138, type: 3}
   deathFX: {fileID: 0}
   debugMarker: {fileID: 4543209727775744340, guid: fbaf8ea4b2c27ab4496bda9e851e4856, type: 3}
+  follower: {fileID: 8394575515557734462, guid: bfd66acd655e2584cb4571991bcc99ab, type: 3}
   weakSpots:
   - {fileID: 5213134805942273842}
   - {fileID: 487534017407917375}

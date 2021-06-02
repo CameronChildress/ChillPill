@@ -11,10 +11,4 @@ public class Explosion : MonoBehaviour
         float lifeTime = GetComponent<AudioSource>().clip.length;
         Destroy(gameObject, lifeTime);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

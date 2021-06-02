@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         Explosion explosion = collision.gameObject.GetComponent<Explosion>();
         if (explosion != null)
         {
-            //health -= 10;
+            health -= 10;
         }
     }
 }
