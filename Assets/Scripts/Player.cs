@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float health = 100.0f;
+    public float health = 50.0f;
     private static Player instance;
+
+    public float score = 0;
     public static Player Instance { get { return instance; } }
     public BasicMovement movement;
     public Weapon weapon;
@@ -46,6 +48,14 @@ public class Player : MonoBehaviour
         if (explosion != null)
         {
             health -= 10;
+        }
+
+        if (collision.collider.CompareTag("Gem"))
+        {
+            health = Mathf.Min(health+1, 50);
+            score += 30;
+            Instantiate(PrefabManager.Instance.GetPrefab("GemSound"), transform.position, Quaternion.identity);
+            Destroy(collision.collider.gameObject);
         }
     }
 }

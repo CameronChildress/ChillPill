@@ -22,7 +22,7 @@ public class Vacuum : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             Vector3 directionVector = (target.transform.position - other.transform.position).normalized;
-            other.GetComponent<Rigidbody>().AddForce(directionVector * magnitude);
+            other.GetComponent<Rigidbody>()?.AddForce(directionVector * magnitude);
         }
     }
 }

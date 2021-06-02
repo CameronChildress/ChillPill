@@ -82,8 +82,33 @@ public class DragonEnemy : MonoBehaviour
         //Remove reference of self from Game object
         Game.Instance.RemoveEnemy(gameObject);
 
+        //Spawn gems
+        SpawnGems();
+
         //Destroy self
         Destroy(this.gameObject);
+    }
+
+    public void SpawnGems()
+    {
+        int randGems = Random.Range(4,8);
+
+        for (int i = 0; i < randGems; i++)
+        {
+            SpawnGem();
+        }
+    }
+
+    public void SpawnGem()
+    {
+        string randGem = "Gem" + Random.Range(1, 3);
+        GameObject gem = Instantiate(PrefabManager.Instance.GetPrefab(randGem), transform.position, Quaternion.identity);
+        Rigidbody rb = gem.GetComponent<Rigidbody>();
+
+        float forceMagnitude = Random.Range(2.5f, 7.0f);
+        Vector3 forceDirection = new Vector3(Random.Range(-1.0f, 1.0f), 1, Random.Range(-1.0f, 1.0f)).normalized;
+
+        rb.AddForce(forceDirection * forceMagnitude, ForceMode.VelocityChange);
     }
 
     private void Shoot()
