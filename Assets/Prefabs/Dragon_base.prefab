@@ -600,11 +600,12 @@ MonoBehaviour:
   speed: 6.5
   shotFireSpeed: 4
   shotAirTime: 3
-  acceleration: 5
   targetTransform: {fileID: 0}
+  shotTransform: {fileID: 1163480684202168160}
   projectile: {fileID: 1866321528604478967, guid: 20091131766c7e143b4f41c41aa98138, type: 3}
   deathFX: {fileID: 0}
   debugMarker: {fileID: 4543209727775744340, guid: fbaf8ea4b2c27ab4496bda9e851e4856, type: 3}
+  follower: {fileID: 8394575515557734462, guid: bfd66acd655e2584cb4571991bcc99ab, type: 3}
   weakSpots:
   - {fileID: 5213134805942273842}
   - {fileID: 487534017407917375}
@@ -1453,7 +1454,7 @@ GameObject:
   - component: {fileID: 7275080752033506065}
   - component: {fileID: 7275080752033506070}
   - component: {fileID: 487534017407917375}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1562,7 +1563,7 @@ GameObject:
   - component: {fileID: 7275080752154298000}
   - component: {fileID: 7275080752154298001}
   - component: {fileID: 234587118380043078}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1671,7 +1672,7 @@ GameObject:
   - component: {fileID: 7275080752777421093}
   - component: {fileID: 7275080752777421114}
   - component: {fileID: 5213134805942273842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1780,7 +1781,7 @@ GameObject:
   - component: {fileID: 7275080752967317048}
   - component: {fileID: 7275080752967317049}
   - component: {fileID: 4266995156368692620}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

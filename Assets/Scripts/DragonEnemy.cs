@@ -12,16 +12,19 @@ public class DragonEnemy : MonoBehaviour
     private float currentFireTime = 0;
     public float shotAirTime = 3;
 
-    [Range(0, 20)]
-    public float acceleration = 5;
+/*    [Range(0, 20)]
+    public float acceleration = 5;*/
 
     private Vector3 velocity;
 
     public Transform targetTransform;
+    public Transform shotTransform;
+
 
     public GameObject projectile;
     public GameObject deathFX;
     public GameObject debugMarker;
+    public GameObject follower;
 
     public List<WeakSpot> weakSpots = new List<WeakSpot>();
 
@@ -36,11 +39,10 @@ public class DragonEnemy : MonoBehaviour
 
     public void Start()
     {
-        GameObject newObject = new GameObject();
-        newObject.transform.parent = targetTransform;
+        GameObject newObject = Instantiate(follower, Vector3.zero, Quaternion.identity);
 
         float randAngle = Random.Range(0, 360);
-        newObject.transform.position += new Vector3(24, 10, 0);
+        newObject.transform.position += new Vector3(24, 10, 0) + Player.Instance.transform.position;
 
         newObject.transform.RotateAround(targetTransform.position, Vector3.up, randAngle);
         targetTransform = newObject.transform;
@@ -53,9 +55,10 @@ public class DragonEnemy : MonoBehaviour
         speed = (Vector3.Distance(targetTransform.position, transform.position) > 30) ? defaultSpeed * 3 : defaultSpeed;
 
         Quaternion neededRotation = Quaternion.LookRotation(targetTransform.position - transform.position);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * 25f);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * 40f);
 
-        velocity += transform.forward * acceleration * Time.deltaTime;
+
+        velocity += transform.forward * speed * Time.deltaTime;
         velocity = Vector3.ClampMagnitude(velocity, speed);
         transform.position += velocity * Time.deltaTime;
     }
@@ -85,17 +88,16 @@ public class DragonEnemy : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 playerVelocity = Player.Instance.characterController.velocity;
         float yVelocity = (-(transform.position.y) - 0.5f * (-9.8f) * (shotAirTime * shotAirTime)) / shotAirTime;
 
         Vector3 guessedPosition = (Player.Instance.transform.position) + (Player.Instance.movement.velocity * shotAirTime);
-        guessedPosition.y = transform.position.y;
-        Instantiate(debugMarker, new Vector3 (guessedPosition.x, 0, guessedPosition.z) , Quaternion.identity);
-        Vector3 vMagnitude = (guessedPosition - transform.position) / shotAirTime;
+        guessedPosition.y = shotTransform.position.y;
+        //Instantiate(debugMarker, new Vector3 (guessedPosition.x, 0, guessedPosition.z) , Quaternion.identity);
+        Vector3 vMagnitude = (guessedPosition - shotTransform.position) / shotAirTime;
         vMagnitude.y = yVelocity;
 
         //Create object and add velocity
-        GameObject shot = Instantiate(projectile, transform.position, Quaternion.identity);
+        GameObject shot = Instantiate(projectile, shotTransform.position, Quaternion.identity);
         shot.GetComponent<Rigidbody>().AddForce(vMagnitude, ForceMode.VelocityChange);
     }
 }
