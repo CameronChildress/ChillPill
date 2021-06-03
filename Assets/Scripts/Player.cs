@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            OnFire();
+            OnFire();            
         }
 
         if (health <= 0)
