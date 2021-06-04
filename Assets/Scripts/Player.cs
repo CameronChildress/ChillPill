@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             //UnityEditor.EditorApplication.isPlaying = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             SceneManager.LoadScene("Title"); 
         }
     }
@@ -54,7 +56,7 @@ public class Player : MonoBehaviour
 
         if (collision.collider.CompareTag("Gem"))
         {
-            health = Mathf.Min(health+1, 50);
+            health = Mathf.Min(health+2, 50);
             score += 30;
             Instantiate(PrefabManager.Instance.GetPrefab("GemSound"), transform.position, Quaternion.identity);
             Destroy(collision.collider.gameObject);
